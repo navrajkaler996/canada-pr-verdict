@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { ArrowRight, MapleLeaf } from "../components/icons";
 import { FEATURES, CRS_BARS } from "../constants/crsData";
+import { useNavigate } from "react-router-dom";
 
 function ParticleCanvas() {
   const canvasRef = useRef(null);
@@ -77,7 +78,8 @@ function AnimatedBar({ value, max, color, delay = 0 }) {
   );
 }
 
-export default function Home({ onStart }) {
+export default function Home() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-white font-sans">
       {/* NAV */}
@@ -90,7 +92,7 @@ export default function Home({ onStart }) {
             </span>
           </div>
           <button
-            onClick={onStart}
+            onClick={() => navigate("/select-path")}
             className="bg-red-600 hover:bg-red-700 active:scale-95 transition-all text-white text-sm font-medium px-5 py-2.5 rounded-full">
             Check eligibility
           </button>
@@ -121,7 +123,7 @@ export default function Home({ onStart }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
-              onClick={onStart}
+              onClick={() => navigate("/select-path")}
               className="group flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 active:scale-[0.98] transition-all text-white font-medium text-[15px] px-7 py-3.5 rounded-2xl">
               Check my chances
               <span className="group-hover:translate-x-1 transition-transform">

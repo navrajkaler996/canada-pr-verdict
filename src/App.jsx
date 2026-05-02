@@ -1,23 +1,22 @@
 import "./App.css";
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import PathSelector from "./pages/PathSelector";
+import CrsQuestionnaire from "./pages/CrsQuestionnaire.jsx";
+
+// import Questionnaire from "./pages/Questionnaire"; // add this when ready
 
 function App() {
-  const [page, setPage] = useState("home");
-  const [path, setPath] = useState(null);
-
-  const handlePathSelect = (selectedPath) => {
-    setPath(selectedPath);
-    // navigate to question flow — swap this for your router later
-    console.log("Selected path:", selectedPath);
-  };
-
-  if (page === "select") {
-    return <PathSelector onSelect={handlePathSelect} />;
-  }
-
-  return <Home onStart={() => setPage("select")} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/select-path" element={<PathSelector />} />
+        <Route path="/crs-questionnaire" element={<CrsQuestionnaire />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
